@@ -31,9 +31,9 @@ var
 # echo "JSON payload ready"
 #echo lineseq[nlines - 1]
 if find(lineseq[nlines - 1], JSproc) > 0:
-  echo "JSON payload ready!"
+  echo "JSON export procedure ready!"
 else:
-  echo "JSON payload missing!"
+  echo "JSON export procedure missing! Adding..."
   var f: File
   if open(f, kincfileDir & kincfileName, fmAppend) == false:
     echo "failed to open file!"
