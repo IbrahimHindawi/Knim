@@ -1,0 +1,142 @@
+{
+    "cFlags": [],
+    "cppFlags": [],
+    "icon": null,
+    "additionalBackends": [],
+    "vsdeploy": false,
+    "linkTimeOptimization": true,
+    "name": "Kinc",
+    "safeName": "Kinc",
+    "version": "1.0",
+    "debugDir": "C:\\Users\\Administrator\\develkinc\\Kni\\Kinc\\Deployment",
+    "basedir": "C:\\Users\\Administrator\\develkinc\\Kni\\Kinc",
+    "uuid": "b06b6013-0533-424e-bfc7-25146812d317",
+    "files": [],
+    "IDLfiles": [],
+    "customs": [],
+    "javadirs": [],
+    "subProjects": [],
+    "includeDirs": [
+        "Sources",
+        "Backends/System/Windows/Sources",
+        "Backends/System/Microsoft/Sources",
+        "Backends/System/Windows/Libraries/DirectShow/BaseClasses",
+        "Backends/Graphics4/OpenGL/Sources",
+        "Backends/Audio2/WASAPI/Sources",
+        "Backends/Graphics5/G5onG4/Sources"
+    ],
+    "defines": [{
+            "value": "KORE_G1",
+            "config": null
+        },
+        {
+            "value": "KORE_G2",
+            "config": null
+        },
+        {
+            "value": "KORE_G3",
+            "config": null
+        },
+        {
+            "value": "KORE_A1",
+            "config": null
+        },
+        {
+            "value": "KORE_A2",
+            "config": null
+        },
+        {
+            "value": "KORE_LZ4X",
+            "config": null
+        },
+        {
+            "value": "KORE_WINDOWS",
+            "config": null
+        },
+        {
+            "value": "KORE_MICROSOFT",
+            "config": null
+        },
+        {
+            "value": "_CRT_SECURE_NO_WARNINGS",
+            "config": null
+        },
+        {
+            "value": "_WINSOCK_DEPRECATED_NO_WARNINGS",
+            "config": null
+        },
+        {
+            "value": "KORE_OPENGL",
+            "config": null
+        },
+        {
+            "value": "GLEW_STATIC",
+            "config": null
+        },
+        {
+            "value": "KORE_G4",
+            "config": null
+        },
+        {
+            "value": "KORE_G5",
+            "config": null
+        },
+        {
+            "value": "KORE_G5ONG4",
+            "config": null
+        }
+    ],
+    "libs": [
+        "dxguid",
+        "dsound",
+        "dinput8",
+        "ws2_32",
+        "Winhttp",
+        "strmiids",
+        "winmm"
+    ],
+    "systemDependendLibraries": {},
+    "includes": [{
+            "file": "Sources/**"
+        },
+        {
+            "file": "Backends/System/Windows/Sources/**"
+        },
+        {
+            "file": "Backends/System/Microsoft/Sources/**"
+        },
+        {
+            "file": "Backends/System/Windows/Libraries/DirectShow/**"
+        },
+        {
+            "file": "Backends/Graphics4/OpenGL/Sources/**"
+        },
+        {
+            "file": "Backends/Audio2/WASAPI/Sources/**"
+        },
+        {
+            "file": "Backends/Graphics5/G5onG4/Sources/**"
+        }
+    ],
+    "excludes": [
+        "Sources/Kore/**",
+        "Sources/kni/io/lz4/**"
+    ],
+    "cpp11": false,
+    "c11": false,
+    "kore": true,
+    "targetOptions": {
+        "android": {},
+        "xboxOne": {},
+        "playStation4": {},
+        "switch": {},
+        "xboxSeriesXS": {},
+        "playStation5": {},
+        "stadia": {},
+        "html5": {}
+    },
+    "rotated": false,
+    "cmd": false,
+    "stackSize": 0,
+    "kincProcessed": true
+}
