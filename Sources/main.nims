@@ -1,7 +1,31 @@
-import os
+import os, strutils
 
 mode = ScriptMode.Verbose
 echo "executing nim script..."
+
+var 
+  backend = "Direct3D11"
+  #backend = "OpenGL"
+
+exec "node Kinc/make.js" & " --graphics " & backend.toLower()
+
+var depldir = "DeploymentN"
+if dirExists(depldir):
+  echo depldir & " directory found"
+else:
+  mkDir(depldir)
+  echo depldir & " directory not found, creating directory."
+
+# TODO: copy file error: access is denied
+# cpFile("Deployment/shader.frag", "DeploymentN")
+# cpFile("Deployment/shader.vert", "DeploymentN")
+
+#switch("forceBuild","on")
+switch("outdir",depldir)
+switch("define",backend)
+
+
+
 
 
 
@@ -12,22 +36,3 @@ echo "executing nim script..."
 #echo findExe("Shader.exe")
 #--outdir:"./DeploymentN"
 #--path:"../Backend"
-
-#exec "node Kinc/make.js" & " --graphics " & "opengl"
-exec "node Kinc/make.js"
-
-var depldir = "DeploymentN"
-if dirExists(depldir):
-  echo depldir & " directory found"
-else:
-  mkDir(depldir)
-  echo depldir & " directory not found, creating directory."
-
-switch("outdir",depldir)
-
-#switch("forceBuild","on")
-
-var 
-  #backend = "Direct3D11"
-  backend = "OpenGL"
-switch("define",backend)
