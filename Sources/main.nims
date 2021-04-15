@@ -1,5 +1,10 @@
+import os
+
 mode = ScriptMode.Verbose
 echo "executing nim script..."
+
+
+
 #echo getCurrentDir()
 #echo projectPath()
 #cd("Kinc")
@@ -8,8 +13,21 @@ echo "executing nim script..."
 #--outdir:"./DeploymentN"
 #--path:"../Backend"
 
-switch("outdir","DeploymentN")
+#exec "node Kinc/make.js" & " --graphics " & "opengl"
+exec "node Kinc/make.js"
 
-switch("forceBuild","on")
-#switch("define","Direct3D11")
-switch("define","OpenGL")
+var depldir = "DeploymentN"
+if dirExists(depldir):
+  echo depldir & " directory found"
+else:
+  mkDir(depldir)
+  echo depldir & " directory not found, creating directory."
+
+switch("outdir",depldir)
+
+#switch("forceBuild","on")
+
+var 
+  #backend = "Direct3D11"
+  backend = "OpenGL"
+switch("define",backend)
