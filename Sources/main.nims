@@ -10,11 +10,6 @@ echo "executing nim script..."
 
 switch("outdir","DeploymentN")
 
-#switch("path","../Kinc/Sources/kinc/graphics4")
-#switch("path","../Kinc/Backends/Graphics4/OpenGL/Sources/kinc/backend/graphics4")
-#switch("path","../Kinc/Backends/Graphics4/Direct3D9/Sources/kinc/backend/graphics4")
-#switch("path","../Kinc/Backends/Graphics4/Direct3D11/Sources/kinc/backend/graphics4")
-
 switch("forceBuild","on")
-switch("define","Direct3D11")
-#switch("define","ogl")
+#switch("define","Direct3D11")
+switch("define","OpenGL")

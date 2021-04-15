@@ -2,7 +2,7 @@ import ptrops
 
 import ../Kinc/Sources/kinc/system
 import ../Kinc/Sources/kinc/graphics4/graphics
-import ../Kinc/Sources/kinc/graphics4/shader
+#import ../Kinc/Sources/kinc/graphics4/shader
 import ../Kinc/Sources/kinc/graphics4/pipeline
 import ../Kinc/Sources/kinc/graphics4/vertexbuffer
 import ../Kinc/Sources/kinc/graphics4/indexbuffer
