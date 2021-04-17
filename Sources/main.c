@@ -42,7 +42,6 @@ static void update() {
 }
 
 static void load_shader(const char *filename, kinc_g4_shader_t *shader, kinc_g4_shader_type_t shader_type) {
-	printf("size of shader = %lu", sizeof(shader));
 	kinc_file_reader_t file;
 	kinc_file_reader_open(&file, filename, KINC_FILE_TYPE_ASSET);
 	size_t data_size = kinc_file_reader_size(&file);
