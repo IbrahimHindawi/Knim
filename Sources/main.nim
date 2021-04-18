@@ -1,8 +1,10 @@
 import ptrops
 
-import ../Kinc/Sources/kinc/system
+import ../Kinc/Sources/kinc/input/input
 import ../Kinc/Sources/kinc/graphics4/g4
+import ../Kinc/Sources/kinc/system
 import ../Kinc/Sources/kinc/io/filereader
+#import ../Kinc/Sources/kinc/math/matrix
 
 var 
   vertex_shader: kinc_g4_shader_t
