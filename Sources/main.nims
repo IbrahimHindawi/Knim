@@ -11,8 +11,8 @@ echo "executing nim script..."
     Vulkan (wip)
 ]#
 var 
-  backend = "Direct3D11"
-  #backend = "OpenGL"
+  #backend = "Direct3D11"
+  backend = "OpenGL"
 
 exec "node Kinc/make.js" & " --graphics " & backend.toLower()
 
