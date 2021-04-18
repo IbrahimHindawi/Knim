@@ -39,5 +39,5 @@ Knim is a Nim binding of the Kinc low level ultra-portable graphics library.
 
 ## Documentation
 
-- Unfortunately there are no docs for Kinc yet there are a few for Kinc.
+- Unfortunately there are no docs for Kinc yet there are a few for [Kha](http://kha.tech/).
 - I will attempt to write docs as I work more on binding this library.
