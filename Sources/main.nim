@@ -10,7 +10,6 @@ var
   pipe: g4.kinc_g4_pipeline_t
   vertices: kinc_g4_vertex_buffer_t
   indices: kinc_g4_index_buffer_t
-  matrix: kinc_matrix3x3_t
 
 const
   heapsize = 1024 * 1024

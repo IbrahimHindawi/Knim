@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Knim is a Nim binding of the Kinc low level ultra-portable graphics library.
+Knim are the Nim bindings of the [Kinc](https://github.com/Kode/Kinc) low level ultra-portable graphics library.
 
 ⚠️This repository is still a work in progress⚠️
 
@@ -39,5 +39,6 @@ Knim is a Nim binding of the Kinc low level ultra-portable graphics library.
 
 ## Documentation
 
-- Unfortunately there are no docs for Kinc yet there are a few for [Kha](http://kha.tech/).
+- Unfortunately there are no docs for [Kinc](https://github.com/Kode/Kinc) yet.
+- Minimal Kha docs here: [Kha](http://kha.tech/).
 - I will attempt to write docs as I work more on binding this library.
