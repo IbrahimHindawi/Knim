@@ -1,20 +1,16 @@
 import ptrops
 
 import ../Kinc/Sources/kinc/system
-import ../Kinc/Sources/kinc/graphics4/graphics
-#import ../Kinc/Sources/kinc/graphics4/shader
-import ../Kinc/Sources/kinc/graphics4/pipeline
-import ../Kinc/Sources/kinc/graphics4/vertexbuffer
-import ../Kinc/Sources/kinc/graphics4/indexbuffer
-import ../Kinc/Sources/kinc/graphics4/vertexstructure
+import ../Kinc/Sources/kinc/graphics4/g4
 import ../Kinc/Sources/kinc/io/filereader
 
 var 
   vertex_shader: kinc_g4_shader_t
   fragment_shader: kinc_g4_shader_t
-  pipe: kinc_g4_pipeline_t
+  pipe: g4.kinc_g4_pipeline_t
   vertices: kinc_g4_vertex_buffer_t
   indices: kinc_g4_index_buffer_t
+  matrix: kinc_matrix3x3_t
 
 const
   heapsize = 1024 * 1024
@@ -59,7 +55,7 @@ proc kickstart() =
   load_shader("DeploymentN/shader.vert", vertex_shader.addr, KINC_G4_SHADER_TYPE_VERTEX)
   load_shader("DeploymentN/shader.frag", fragment_shader.addr, KINC_G4_SHADER_TYPE_FRAGMENT)
 
-  var structure: kinc_g4_vertex_structure
+  var structure: kinc_g4_vertex_structure_t
   kinc_g4_vertex_structure_init(structure.addr)
   kinc_g4_vertex_structure_add(structure.addr, "pos", KINC_G4_VERTEX_DATA_FLOAT3)
   kinc_g4_pipeline_init(pipe.addr)
