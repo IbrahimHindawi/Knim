@@ -7,13 +7,12 @@ Knim is a Nim binding of the Kinc low level ultra-portable graphics library.
 
 ⚠️This repository is still a work in progress⚠️
 
-- Tested only on Windows so far
-- Only Direct3D11 and OpenGL
+- Tested only on Windows (Direct3D11 and OpenGL) and linux (OpenGL)
 - More Backends & Systems coming soon
 
 ## Dependencies
 
-- You need node installed on your system PATH. you can download the binary
+- You need node installed on your system PATH. (You can download the binary)
 
 ## Features
 
@@ -31,9 +30,14 @@ Knim is a Nim binding of the Kinc low level ultra-portable graphics library.
     -  Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```
     -  Place dll in a folder called ```DeploymentN``` in the root
 - ```nim c -r Sources/main.nim```
-- you can select backend from ```Sources/main.nims``` file
+- you can switch backend from ```Sources/main.nims``` file
 
 ## Tutorials
 
 - [Lewis Lepton](https://www.youtube.com/playlist?list=PL4neAtv21WOmmR5mKb7TQvEQHpMh1h0po) - Kha Tutorial
 - [Lubos Lenco](https://github.com/luboslenco/kha3d_examples/wiki) - Kha 3D Tutorial
+
+## Documentation
+
+- Unfortunately there are no docs for Kinc yet there are a few for Kinc.
+- I will attempt to write docs as I work more on binding this library.
