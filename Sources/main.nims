@@ -3,9 +3,16 @@ import os, strutils
 mode = ScriptMode.Verbose
 echo "executing nim script..."
 
+#[
+  Choose your backend here:
+    Direct3D11 (Windows)
+    OpenGL (Windows Linux)
+    Metal (wip)
+    Vulkan (wip)
+]#
 var 
-  #backend = "Direct3D11"
-  backend = "OpenGL"
+  backend = "Direct3D11"
+  #backend = "OpenGL"
 
 exec "node Kinc/make.js" & " --graphics " & backend.toLower()
 
