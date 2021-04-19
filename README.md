@@ -26,11 +26,11 @@ Knim are the Nim bindings of the [Kinc](https://github.com/Kode/Kinc) low level 
 
 - you must first generate the dll for your chosen backend:
     -  From the Knim root directory, run: ```node Kinc/make --dynlib -g opengl``` or ```node Kinc/make --dynlib -g direct3d11```
-    -  Open the sln in the ```Knim/build``` directory and build in visual studio to get ```Kinc.dll```
+    -  Open the Visual Studio Solution in the ```Knim/build``` directory and build in visual studio to get ```Kinc.dll```
     -  Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```
     -  Place dll in a folder called ```DeploymentN``` in the root
-- ```nim c -r Sources/main.nim```
-- you can switch backend from ```Sources/main.nims``` file
+- ```nim c -r Sources/<exampleName>.nim```
+- you can switch backend from ```Sources/exampleName.nims``` file
 
 ## Tutorials
 
