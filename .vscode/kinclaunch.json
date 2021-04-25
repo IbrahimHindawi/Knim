@@ -1,0 +1,27 @@
+{
+	"configurations": [
+		// {
+		// 	"name": "Kinc: Launch",
+		// 	"type": "cppvsdbg",
+		// 	"request": "launch",
+		// 	"program": "c:\\Users\\Administrator\\develkinc\\Knim\\Deployment\\Kinc.exe",
+		// 	"cwd": "c:\\Users\\Administrator\\develkinc\\Knim\\Deployment",
+		// 	"preLaunchTask": "Kinc: Build for Windows",
+		// 	"externalConsole": true,
+		// 	"logging": {
+		// 		"moduleLoad": false,
+		// 		"trace": true
+		// 	}
+		// },
+		{
+            "type": "lldb",
+            "request": "launch",
+            "name": "nim: debug current file",
+            "preLaunchTask": "nim: build current file (for debugging)",
+            "program": "DeploymentN/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+        }
+	],
+	"compounds": []
+}

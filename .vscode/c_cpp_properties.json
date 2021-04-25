@@ -1,0 +1,39 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Sources",
+                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\System\\Windows\\Sources",
+                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\System\\Microsoft\\Sources",
+                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\System\\Windows\\Libraries\\DirectShow\\BaseClasses",
+                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\Graphics4\\Direct3D11\\Sources",
+                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\Audio2\\WASAPI\\Sources",
+                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\Graphics5\\G5onG4\\Sources"
+            ],
+            "defines": [
+                "KORE_G1",
+                "KORE_G2",
+                "KORE_G3",
+                "KORE_A1",
+                "KORE_A2",
+                "KORE_LZ4X",
+                "KORE_WINDOWS",
+                "KORE_MICROSOFT",
+                "_CRT_SECURE_NO_WARNINGS",
+                "_WINSOCK_DEPRECATED_NO_WARNINGS",
+                "KORE_DIRECT3D",
+                "KORE_DIRECT3D11",
+                "KORE_G4",
+                "KORE_G5",
+                "KORE_G5ONG4"
+            ],
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64",
+            "windowsSdkVersion": "10.0.19041.0"
+        }
+    ],
+    "version": 4
+}
