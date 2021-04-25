@@ -2,11 +2,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run module.nim",
+            "label": "Nim: Build & Run",
             "command": "nim",
             "args": [
                 "c",
-                "-o:DeploymentN/${fileBasenameNoExtension}",
+                //"-o:DeploymentN/${fileBasenameNoExtension}",
                 //"--define: Direct3D11",
                 //"--path:../Kinc/Backends/Graphics4/Direct3D11/Sources/kinc/backend/graphics4/",
                 "-r",
@@ -22,14 +22,14 @@
             }
         },
         {
-            "label": "nim: build current file (for debugging)",
+            "label": "Nim: Build Debug",
             "command": "nim",
             "args": [
                 "compile",
                 "-g",
                 //"--define: Direct3D11",
                 "--debugger:native",
-                "-o:DeploymentN/${fileBasenameNoExtension}",
+                //"-o:DeploymentN/${fileBasenameNoExtension}",
                 "Sources/${fileBasename}"
             ],
             "options": {
