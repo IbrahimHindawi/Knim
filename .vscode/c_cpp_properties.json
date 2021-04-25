@@ -3,13 +3,13 @@
         {
             "name": "Win32",
             "includePath": [
-                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Sources",
-                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\System\\Windows\\Sources",
-                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\System\\Microsoft\\Sources",
-                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\System\\Windows\\Libraries\\DirectShow\\BaseClasses",
-                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\Graphics4\\Direct3D11\\Sources",
-                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\Audio2\\WASAPI\\Sources",
-                "c:\\Users\\Administrator\\develkinc\\Knim\\Kinc\\Backends\\Graphics5\\G5onG4\\Sources"
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Sources",
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\System\\Windows\\Sources",
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\System\\Microsoft\\Sources",
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\System\\Windows\\Libraries\\DirectShow\\BaseClasses",
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\Graphics4\\Direct3D11\\Sources",
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\Audio2\\WASAPI\\Sources",
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\Graphics5\\G5onG4\\Sources"
             ],
             "defines": [
                 "KORE_G1",

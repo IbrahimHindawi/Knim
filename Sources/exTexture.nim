@@ -64,13 +64,13 @@ proc kickstart() =
     var
       image: kinc_image_t
       image_mem: pointer = alloc(250 * 250 * 4)
-    discard kinc_image_init_from_file(image.addr, image_mem, "DeploymentN/parrot.png")
+    discard kinc_image_init_from_file(image.addr, image_mem, "parrot.png")
     kinc_g4_texture_init_from_image(texture.addr, image.addr)
     kinc_image_destroy(image.addr)
 
   block:
     var reader: kinc_file_reader_t
-    discard kinc_file_reader_open(reader.addr, "DeploymentN/texture.vert", KINC_FILE_TYPE_ASSET)
+    discard kinc_file_reader_open(reader.addr, "texture.vert", KINC_FILE_TYPE_ASSET)
     var
       size = kinc_file_reader_size(reader.addr)
       data: ptr uint8 = cast[ptr uint8](alloc(size))
@@ -81,7 +81,7 @@ proc kickstart() =
 
   block:
     var reader: kinc_file_reader_t
-    discard kinc_file_reader_open(reader.addr, "DeploymentN/texture.frag", KINC_FILE_TYPE_ASSET)
+    discard kinc_file_reader_open(reader.addr, "texture.frag", KINC_FILE_TYPE_ASSET)
     var
       size = kinc_file_reader_size(reader.addr)
       data: ptr uint8 = cast[ptr uint8](alloc(size))

@@ -10,36 +10,28 @@ echo "executing nim script..."
     Metal (wip)
     Vulkan (wip)
 ]#
+
 var 
   backend = "Direct3D11"
   #backend = "OpenGL"
 
+# run SPIR-V shader compiler and build C project
 exec "node Kinc/make.js" & " --graphics " & backend.toLower()
 
-var depldir = "DeploymentN"
-if dirExists(depldir):
-  echo depldir & " directory found"
+var deployDir = "DeploymentN"
+if dirExists(deployDir):
+  echo deployDir & " directory found"
 else:
-  mkDir(depldir)
-  echo depldir & " directory not found, creating directory."
+  mkDir(deployDir)
+  echo deployDir & " directory not found, creating directory."
+# go to deployment directory
+cd(deployDir)
 
 # TODO: copy file error: access is denied
 # cpFile("Deployment/shader.frag", "DeploymentN")
 # cpFile("Deployment/shader.vert", "DeploymentN")
 
 #switch("forceBuild","on")
-switch("outdir",depldir)
 switch("define",backend)
-
-
-
-
-
-
-#echo getCurrentDir()
-#echo projectPath()
-#cd("Kinc")
-#echo getCurrentDir()
-#echo findExe("Shader.exe")
-#--outdir:"./DeploymentN"
-#--path:"../Backend"
+# set output directory to current directory => deployment directory
+switch("outdir",".")

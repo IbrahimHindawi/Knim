@@ -61,8 +61,8 @@ proc kickstart() =
   kinc_set_update_callback(update)
   
   # DeploymentN Sources
-  load_shader("DeploymentN/shader.vert", vertex_shader.addr, KINC_G4_SHADER_TYPE_VERTEX)
-  load_shader("DeploymentN/shader.frag", fragment_shader.addr, KINC_G4_SHADER_TYPE_FRAGMENT)
+  load_shader("shader.vert", vertex_shader.addr, KINC_G4_SHADER_TYPE_VERTEX)
+  load_shader("shader.frag", fragment_shader.addr, KINC_G4_SHADER_TYPE_FRAGMENT)
 
   var structure: kinc_g4_vertex_structure_t
   kinc_g4_vertex_structure_init(structure.addr)
