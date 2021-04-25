@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "Nim: Debug",
             "preLaunchTask": "Nim: Build Debug",
-            "program": "/DeploymentN/${fileBasenameNoExtension}",
+            "program": "DeploymentN/${fileBasenameNoExtension}",
             "args": [],
             "cwd": "${workspaceRoot}/DeploymentN/", //workspaceFolder
         }
