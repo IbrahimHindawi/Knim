@@ -4,11 +4,11 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "nim: debug current file",
-            "preLaunchTask": "nim: build current file (for debugging)",
-            "program": "DeploymentN/${fileBasenameNoExtension}",
+            "name": "Nim: Debug",
+            "preLaunchTask": "Nim: Build Debug",
+            "program": "/DeploymentN/${fileBasenameNoExtension}",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceRoot}/DeploymentN/", //workspaceFolder
         }
     ]
 }
