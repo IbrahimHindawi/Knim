@@ -36,7 +36,7 @@ Not tested on:
 This library can be ran in two modes: Dynamic and Codegen.<br>
 Dynamic: link against a dynamic library and debug in VS Code LLDB.<br>
 Codegen: inject the C generated from nim into the target IDE to deploy.<br>
-You can switch backend from ```Knim-Standalone\Knim\prog.nims``` NimScript file.<br>
+Please visit ```Knim-Standalone\Knim\prog.nims``` NimScript file.<br>
 The following explanations are for Windows and Android but should work anywhere.<br>
 dynamic mode:
 - you must first generate the dll for your chosen backend:
@@ -44,7 +44,7 @@ dynamic mode:
     -  Open the Visual Studio Solution in the ```Knim/build``` directory and build in visual studio to get ```Kinc.dll```
     -  Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```
     -  Place dll in a folder called ```Deployment``` in the root
-- ```nim c -r Knim-Standalone\Knim\prog.nim```
+    - ```nim c -r Knim-Standalone\Knim\prog.nim```
 codegen mode:
 -```nim compile --compileOnly --nimcache:Sources\cache -d:OpenGL -d:codegen --noMain --header:${fileBasename} SourcesNim/${fileBasename}```
 -add desired compiler: ```--cc:cc```, target OS: ```--os:android```, cpu artchitecture: ```--cpu:arm64```, extra: ```-d:androidNDK```
