@@ -45,6 +45,7 @@ The following explanations are for Windows and Android but should work anywhere.
     -  Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```
     -  Place dll in a folder called ```Deployment``` in the root
     - ```nim c -r Knim-Standalone\Knim\prog.nim```
+
 - codegen mode:
     -```nim compile --compileOnly --nimcache:Sources\cache -d:OpenGL -d:codegen --noMain --header:${fileBasename} SourcesNim/${fileBasename}```
     -add desired compiler: ```--cc:cc```, target OS: ```--os:android```, cpu artchitecture: ```--cpu:arm64```, extra: ```-d:androidNDK```
