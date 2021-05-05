@@ -7,11 +7,12 @@ Knim are the Nim bindings of the [Kinc](https://github.com/Kode/Kinc) low level 
 
 ⚠️This repository is still a work in progress⚠️
 
-Tested only on:
+Tested on:
 <li>Windows: Direct3D11 and OpenGL (Direct3D12 & Vulkan soon)</li> 
 <li>Linux: OpenGL (Vulkan soon)</li>
 <li>MacOSX: OpenGL (Metal soon)</li>
 <li>Android: OpenGL (Vulkan soon)</li>
+
 Not tested on:
 <li>IOS: Metal</li>
 <li>PS4/PS5: LibGNM</li>
@@ -39,17 +40,17 @@ Codegen: inject the C generated from nim into the target IDE to deploy.<br>
 Please visit ```Knim-Standalone\Knim\prog.nims``` NimScript file.<br>
 The following explanations are for Windows and Android but should work anywhere.<br>
 - dynamic mode:
-    - you must first generate the dll for your chosen backend:
-    -  From the Knim root directory, run: ```node Kinc/make --dynlib -g opengl``` or ```node Kinc/make --dynlib -g direct3d11```
-    -  Open the Visual Studio Solution in the ```Knim/build``` directory and build in visual studio to get ```Kinc.dll```
-    -  Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```
-    -  Place dll in a folder called ```Deployment``` in the root
-    - ```nim c -r Knim-Standalone\Knim\prog.nim```
+    - You must first generate the dll for your chosen backend.
+    - From the Knim root directory, run: ```node Kinc/make --dynlib -g opengl``` or ```node Kinc/make --dynlib -g direct3d11```.
+    - Open the Visual Studio Solution in the ```Knim/build``` directory and build in visual studio to get ```Kinc.dll```.
+    - Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```.
+    - Place dll in a folder called ```Deployment``` in the root.
+    - Run ```nim c -r Knim-Standalone\Knim\prog.nim```.
 
 - codegen mode:
-    - ```nim compile --compileOnly --nimcache:Sources\cache -d:OpenGL -d:codegen --noMain --header:${fileBasename} SourcesNim/${fileBasename}```
-    - add desired compiler: ```--cc:cc```, target OS: ```--os:android```, cpu artchitecture: ```--cpu:arm64```, extra: ```-d:androidNDK```
-    - then run ```node Kinc/make android``` to build android studio project
+    - ```nim compile --compileOnly --nimcache:Sources\cache -d:OpenGL -d:codegen --noMain --header:${fileBasename} SourcesNim/${fileBasename}```.
+    - add desired compiler: ```--cc:cc```, target OS: ```--os:android```, cpu artchitecture: ```--cpu:arm64```, extra: ```-d:androidNDK```.
+    - then run ```node Kinc/make android``` to build android studio project.
     - inside Android Studio, add the nim generated c files & ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```.
 
 ## Tutorials
