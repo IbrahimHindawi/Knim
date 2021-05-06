@@ -1,8 +1,8 @@
 #include "prog.h"
 
-int main() {
+int kickstart(int argc, char **argv)  {
     NimMain();
-    nim_enter();
+    nim_start();
     return 0;
 }
 
