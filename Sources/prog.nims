@@ -1,3 +1,7 @@
+#[
+  nim c -d:Direct3D11 -d:dynamic  -r Sources\prog.nim
+]#
+
 import os
 import strutils
 
@@ -40,66 +44,51 @@ const
   Direct3D11 = "Direct3D11"
   OpenGL = "OpenGL"
 
-const 
   backend = Direct3D11
 
 if backend == Direct3D11:
-  echo Direct3D11 & " backend chosen"
+  echo "Backend: " & Direct3D11
   switch("define", Direct3D11)
 
 elif backend == OpenGL:
-  echo OpenGL & " backend chosen"
+  echo "Backend: " & OpenGL
   switch("define", OpenGL)
 
 # Check for Deployment Directory
 makeDir(deploymentDir)
 
 # Check for NimCache
-makeDir(nimCache)
+# makeDir(nimCache)
 
-echo "Starting deployment"
+# echo "Starting dynamic deployment"
 
-# codegen compiler operating systems
-#switch("os","android")
-#switch("define","androidNDK")
+# execKincMake(backend)
 
-# codegen compiler cpu architectures
-# switch("cpu","arm64")
+# switch("outdir", deploymentDir)
 
-# codegen compiler
-# switch("cc","vcc")
-# switch("cc","clang")
+# cd(deploymentDir)
 
-#[
-  build mode switching
-]#
-# switch("define","dynamic")
-# switch("define","codegen")
 
-# android
-# nim compile --cc:clang --os:android --cpu:arm64 --d:androidNDK --compileOnly --nimcache:Knim-Standalone\cache -d:OpenGL -d:codegen --noMain --header:prog.h Knim-Standalone\Knim\prog.nim
-# ndk {abiFilters "arm64-v8a"}
 
-# windows
-# nim compile --cc:vcc --compileOnly --nimcache:NimCache --noMain --header:prog.h -d:Direct3D11 -d:codegen Sources\prog.nim
-
-# nim c -d:dynamic --run Sources\prog.nim
 if defined(dynamic):
-  echo "building nim dynamic..."
+  echo "Building nim dynamic..."
   
   execKincMake(backend)
 
   switch("outdir", deploymentDir)
 
-  # go to deployment directory
   cd(deploymentDir)
 
 elif defined(codegen):
-  switch("nimcache",nimCache)
-  
-  #execKincMake(backend)
+  # echo "building nim codegen..."
+  echo "Cannot codegen from here."
+  echo "nim progCodegen.nims"
 
-  echo "building nim codegen..."
+  
+  # execKincMake(backend)
+
+  # switch("nimcache",nimCache)
+
 
 echo "-------------------------------"
 
