@@ -1,6 +1,8 @@
 nimcache/
 nimblecache/
 htmldocs/
-DeploymentN/
-Deployment/
 build/
+Deployment/
+DeploymentN/
+NimCache/
+
