@@ -1,3 +1,12 @@
+#[
+  build commands:
+    dynamic:
+      nim c -r -d:dynamic Sources\prog.nim
+    codegen:
+      nim Sources\progCodegen.nims
+]#
+
+
 import utils/ptrops
 
 import kinc/graphics4/vertexstructure
