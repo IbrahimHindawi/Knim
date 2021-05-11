@@ -35,23 +35,21 @@ Tested on:
 ## How to run
 
 This library can be ran in two modes: Dynamic and Codegen.<br>
-Dynamic: link against a dynamic library and debug in VS Code LLDB.<br>
-Codegen: inject the C generated from nim into the target IDE to deploy.<br>
-Please visit ```Knim-Standalone\Knim\prog.nims``` NimScript file.<br>
+dynamic: link against a dynamic library and debug in VS Code using LLDB.<br>
+codegen: inject the C generated from nim into the target IDE to deploy.<br>
 The following explanations are for Windows and Android but should work anywhere.<br>
-- dynamic mode:
+- dynamic library mode:
     - You must first generate the dll for your chosen backend.
     - From the Knim root directory, run: ```node Kinc/make --dynlib -g opengl``` or ```node Kinc/make --dynlib -g direct3d11```.
-    - Open the Visual Studio Solution in the ```Knim/build``` directory and build in visual studio to get ```Kinc.dll```.
+    - Open the solution in the ```build``` directory and build to get ```Kinc.dll```.
     - Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```.
     - Place dll in a folder called ```Deployment``` in the root.
-    - Run ```nim c -r Knim-Standalone\Knim\prog.nim```.
+    - ```nim c -d:dynamic -r Sources/prog.nim```
 
-- codegen mode:
-    - ```nim compile --compileOnly --nimcache:Sources\cache -d:OpenGL -d:codegen --noMain --header:${fileBasename} SourcesNim/${fileBasename}```.
-    - add desired compiler: ```--cc:cc```, target OS: ```--os:android```, cpu artchitecture: ```--cpu:arm64```, extra: ```-d:androidNDK```.
-    - then run ```node Kinc/make android``` to build android studio project.
-    - inside Android Studio, add the nim generated c files & ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```.
+- codegen inject mode:
+    - ```nim Sources\progCodegen.nims```
+    - Customize ```progCodegen.nims``` Nimscript file for target platform.
+    - for Android, add ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```.
 
 ## Tutorials
 
@@ -64,5 +62,5 @@ The following explanations are for Windows and Android but should work anywhere.
 - Minimal Kha docs here: [Kha](http://kha.tech/).
 
 ## To do:
-- Automate the project ( there are already .vscode build tasks in the subdirectory).
+- Automate the project ( there are already .vscode build tasks in the standalone subdirectory).
 - I will attempt to write docs as I work more on binding this library.
