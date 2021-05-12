@@ -1,9 +1,9 @@
 #[
   build commands:
     dynamic:
-      nim c -r -d:dynamic Sources\prog.nim
+      nim c -d:direct3d11 -d:dynamic -r Sources\prog.nim
     codegen:
-      nim Sources\progCodegen.nims
+      nim -d:direct3d11 Sources\progCodegen.nims
 ]#
 
 

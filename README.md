@@ -44,12 +44,12 @@ The following explanations are for Windows and Android but should work anywhere.
     - Open the solution in the ```build``` directory and build to get ```Kinc.dll```.
     - Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```.
     - Place dll in a folder called ```Deployment``` in the root.
-    - ```nim c -d:dynamic -r Sources/prog.nim```
+    - ```nim c -d:direct3d11 -d:dynamic -r Sources\prog.nim```
 
 - codegen inject mode:
-    - ```nim Sources\progCodegen.nims```
     - Customize ```progCodegen.nims``` Nimscript file for target platform.
     - for Android, add ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```.
+    - ```nim -d:direct3d11 Sources\progCodegen.nims```
 
 ## Tutorials
 

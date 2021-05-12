@@ -31,6 +31,22 @@ import strutils
 
 # nim c -d:dynamic --run Sources\prog.nim
 
+const
+  Direct3D11 = "Direct3D11"
+  OpenGL = "OpenGL"
+
+var
+  backend = ""
+
+if defined(Direct3D11):
+  echo "Backend: " & Direct3D11
+  backend = Direct3D11
+  switch("define", Direct3D11)
+
+if defined(OpenGL):
+  echo "Backend: " & OpenGL
+  backend = OpenGL
+  switch("define", OpenGL)
 
 let
   progName = "prog"
@@ -38,7 +54,8 @@ let
   opersyst = "windows"
   cpuarchi = "amd64"
   nimcache = "NimCache"
-  backend  = "Direct3D11"
+  #backend  = "Direct3D11"
+  #backend  = "OpenGL"
   runmode  = "codegen"
 
 exec "nim "     & "c "     & "--noMain " & "--compileOnly " &
@@ -51,5 +68,5 @@ exec "nim "     & "c "     & "--noMain " & "--compileOnly " &
   "-d:"         & runmode  & " " &
   "Sources/"    & progName & ".nim"
 
-exec "node Kinc/make.js" & " --graphics " & backend.toLower() #& " --compile"
+exec "node Kinc/make.js" & " --graphics " & backend.toLower() & " --compile " & " --run "
 

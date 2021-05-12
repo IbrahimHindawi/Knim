@@ -44,14 +44,17 @@ const
   Direct3D11 = "Direct3D11"
   OpenGL = "OpenGL"
 
-  backend = Direct3D11
+var
+  backend = ""
 
-if backend == Direct3D11:
+if defined(Direct3D11):
   echo "Backend: " & Direct3D11
+  backend = Direct3D11
   switch("define", Direct3D11)
 
-elif backend == OpenGL:
+if defined(OpenGL):
   echo "Backend: " & OpenGL
+  backend = OpenGL
   switch("define", OpenGL)
 
 # Check for Deployment Directory
