@@ -1,12 +1,12 @@
 #[
   build commands:
     dynamic:
-      nim c -d:direct3d11 -d:dynamic -r Sources\prog.nim
+      nim -d:dynamic -d:direct3d11 Sources\build.nims
     codegen:
-      nim -d:direct3d11 Sources\progCodegen.nims
+      nim -d:codegen -d:direct3d11 Sources\build.nims
 ]#
 
-
+#../Knim-Standalone/Knim/
 import utils/ptrops
 
 import kinc/graphics4/vertexstructure

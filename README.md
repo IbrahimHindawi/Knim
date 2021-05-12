@@ -36,20 +36,20 @@ Tested on:
 
 This library can be ran in two modes: Dynamic and Codegen.<br>
 dynamic: link against a dynamic library and debug in VS Code using LLDB.<br>
-codegen: inject the C generated from nim into the target IDE to deploy.<br>
-The following explanations are for Windows and Android but should work anywhere.<br>
+codegen: inject the C generated from nim into the target IDE and build from IDE to deploy.<br>
+Visit: ```build.nims``` to customize building of executables<br>
 - dynamic library mode:
     - You must first generate the dll for your chosen backend.
     - From the Knim root directory, run: ```node Kinc/make --dynlib -g opengl``` or ```node Kinc/make --dynlib -g direct3d11```.
     - Open the solution in the ```build``` directory and build to get ```Kinc.dll```.
     - Rename to ```KincDirect3D11.dll``` or ```KincOpenGL.dll```.
     - Place dll in a folder called ```Deployment``` in the root.
-    - ```nim c -d:direct3d11 -d:dynamic -r Sources\prog.nim```
+    - ```nim -d:dynamic -d:direct3d11 Sources\build.nims```
 
 - codegen inject mode:
     - Customize ```progCodegen.nims``` Nimscript file for target platform.
     - for Android, add ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```.
-    - ```nim -d:direct3d11 Sources\progCodegen.nims```
+    - ```nim -d:codegen -d:direct3d11 Sources\build.nims```
 
 ## Tutorials
 
@@ -63,4 +63,6 @@ The following explanations are for Windows and Android but should work anywhere.
 
 ## To do:
 - Automate the project ( there are already .vscode build tasks in the standalone subdirectory).
+- Make Nimble Package(s).
+- get rid of prog.nims
 - I will attempt to write docs as I work more on binding this library.
