@@ -23,6 +23,7 @@ proc makeDir(dirName:string) =
 
 echoYellow "Executing NimScript . . ."
 
+#quit(QuitSuccess)
 #[
   TODO(ibrahim): make nimnble package
 ]#

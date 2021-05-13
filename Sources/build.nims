@@ -74,8 +74,8 @@ elif defined(OpenGL):
 
 else:
   echoError "Backend: Unknown!"
-  echoError "Please choose a backend"
-  echoError "direct3d11 or opengl"
+  echoError "Please choose a backend: direct3d11 or opengl"
+  echoError ""
 
 #[
   SHARED VARIABLES
