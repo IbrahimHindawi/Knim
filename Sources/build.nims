@@ -2,7 +2,7 @@
 import os
 import strutils
 
-mode = ScriptMode.Verbose
+mode = ScriptMode.Verbose 
 
 proc echoYellow*(phrase: string) =
   echo "\e[33m", "[Build] ", phrase, "\e[0m "
@@ -27,35 +27,33 @@ echoYellow "Executing NimScript . . ."
   TODO(ibrahim): make nimnble package
 ]#
 
-# const
-#   cwd = getCurrentDir()
-#   rel = relativePath(cwd & "/Sources", cwd & "/Deployment")
-#   cfn = instantiationInfo()
-# echoYellow cwd
-# echoYellow rel
-# # echo cfn.filename
-
-#echo paramCount(), " ", paramStr(1)
-echo commandLineParams()
-
 const
   progName = "prog"
-  srcDir   = "Sources/"
-  srcRel   = "../" & srcDir
-  extraDir = ""
-
-  dynPath = srcRel & extraDir & progName & ".nim"
-  genPath = srcDir & extraDir & progName & ".nim"
-
-
+  
   dynamic = "dynamic"
   codegen = "codegen"
 
   Direct3D11 = "Direct3D11"
-  OpenGL = "OpenGL"
+  OpenGL     = "OpenGL"
 
-  pathcmd = " --path:../Knim-Standalone/Knim "
+  pathcmd  = " --path:../Knim-Standalone/Knim "
   nimcache = "NimCache"
+
+var
+  clargs = commandLineParams()
+
+if clargs.len < 4:
+  echoError "Fatal Error: bad build command."
+  echoError "nim -d:[backend] -d:[mode] Sources/build.nims [programfile]"
+  echoError "Build Terminated."
+  
+var  
+  target = clargs[3]
+  
+  genPath = target
+
+  cwd = getCurrentDir()
+  dynPath = relativePath(cwd & "/" & target, cwd & "/" & "Deployment")
 
 cleanBuildAndCache("build", nimcache)
 
@@ -74,8 +72,10 @@ elif defined(OpenGL):
 
 else:
   echoError "Backend: Unknown!"
-  echoError "Please choose a backend: direct3d11 or opengl"
-  echoError ""
+  echoError "Please choose a backend:"
+  echoError "direct3d11 or opengl"
+  echoError "Build Terminated."
+  exec "nim c -r BUILDFAILED_NO_BACKEND.nim"
 
 #[
   SHARED VARIABLES
@@ -159,3 +159,5 @@ else:
   echoError "Mode: Unknown!"
   echoError "Please choose a Mode"
   echoError "dynamic or codegen"
+  echoError "Build Terminated."
+  exec "nim c -r BUILDFAILED_NO_MODE.nim"
