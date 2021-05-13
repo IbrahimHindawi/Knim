@@ -47,8 +47,9 @@ Visit: ```build.nims``` to customize building of executables<br>
     - ```nim -d:dynamic -d:direct3d11 Sources\build.nims```
 
 - codegen inject mode:
-    - Customize ```progCodegen.nims``` Nimscript file for target platform.
-    - for Android, add ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```.
+    - Edit kincfile.js to point to your local nim/lib directory.
+    - Customize ```build.nims``` Nimscript file for target platform.
+    - for Android, add ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```
     - ```nim -d:codegen -d:direct3d11 Sources\build.nims```
 
 ## Tutorials

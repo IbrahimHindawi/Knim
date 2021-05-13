@@ -23,10 +23,12 @@ import kinc/system
 
 import kinc/graphics4/vertexstructure
 import kinc/math/matrix
-#import g4
 
-
-#const path = "C:/Users/Administrator/devel-nim/devel-knim/Knim/Deployment/"
+#[
+  WARNING:
+  On Mac you need to set the project path for debug builds
+  so that the system knows where to find assets
+]#
 const path = ""
 
 var 
@@ -56,8 +58,7 @@ proc load_shader(filename: cstring, shader: ptr kinc_g4_shader_t, shader_type: k
   discard kinc_file_reader_open(file.addr, filename, KINC_FILE_TYPE_ASSET)
   var
     data_size: csize_t = kinc_file_reader_size(file.addr)
-    data: ptr uint8 = cast[ptr uint8](alloc(data_size))#create(uint8)
-    #data: uint8 
+    data: ptr uint8 = cast[ptr uint8](alloc(data_size))
   discard kinc_file_reader_read(file.addr, data, data_size)
   kinc_file_reader_close(file.addr)
   kinc_g4_shader_init(shader, data, data_size, shader_type)
@@ -81,10 +82,6 @@ proc update {.cdecl.} =
 proc nim_start() {.exportc.} =
   discard kinc_init("Shader", 1024, 768, nil, nil)
   kinc_set_update_callback(update)
-  
-  # # DeploymentN Sources
-  # load_shader(path&"texture.vert", vertex_shader.addr, KINC_G4_SHADER_TYPE_VERTEX)
-  # load_shader(path&"texture.frag", fragment_shader.addr, KINC_G4_SHADER_TYPE_FRAGMENT)
 
   block:
     var
@@ -115,8 +112,6 @@ proc nim_start() {.exportc.} =
     kinc_file_reader_close(reader.addr)
 
     kinc_g4_shader_init(fragmentShader.addr, data, size, KINC_G4_SHADER_TYPE_FRAGMENT)
-
-
 
   var structure: kinc_g4_vertex_structure_t
   kinc_g4_vertex_structure_init(structure.addr)
