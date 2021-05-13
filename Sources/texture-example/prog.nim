@@ -1,11 +1,10 @@
 #[
   build commands:
     dynamic:
-      nim c -d:direct3d11 -d:dynamic -r Sources\prog.nim
+      nim -d:dynamic -d:direct3d11 Sources/build.nims Sources/prog.nim
     codegen:
-      nim -d:direct3d11 Sources\progCodegen.nims
+      nim -d:codegen -d:direct3d11 Sources/build.nims Sources/prog.nim
 ]#
-
 
 import utils/ptrops
 
