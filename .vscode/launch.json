@@ -1,14 +1,18 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Nim: Debug",
-            "preLaunchTask": "Nim: Build Debug",
-            "program": "DeploymentN/${fileBasenameNoExtension}",
-            "args": [],
-            "cwd": "${workspaceRoot}/DeploymentN/", //workspaceFolder
-        }
-    ]
+	"configurations": [
+		{
+			"name": "Kinc: Launch",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "c:\\Users\\Administrator\\devel-nim\\devel-knim\\Knim\\Deployment\\Kinc.exe",
+			"cwd": "c:\\Users\\Administrator\\devel-nim\\devel-knim\\Knim\\Deployment",
+			"preLaunchTask": "Kinc: Build for Windows",
+			"externalConsole": true,
+			"logging": {
+				"moduleLoad": false,
+				"trace": true
+			}
+		}
+	],
+	"compounds": []
 }

@@ -1,6 +1,7 @@
 let project = new Project('Kinc');
 
 project.addFile('Sources/**');
+project.addFile('Shaders/**');
 project.setDebugDir('Deployment');
 
 // PATH TO NIM LIBRARY

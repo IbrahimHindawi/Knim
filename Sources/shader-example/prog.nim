@@ -135,4 +135,7 @@ proc nim_start() {.exportc.} =
 
   kinc_start()
 
-nim_start()
+when defined(dynamic):
+  nim_start()
+elif defined(codegen):
+  echo "nim_start procedure called from C..."

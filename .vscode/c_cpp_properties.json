@@ -9,7 +9,10 @@
                 "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\System\\Windows\\Libraries\\DirectShow\\BaseClasses",
                 "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\Graphics4\\Direct3D11\\Sources",
                 "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\Audio2\\WASAPI\\Sources",
-                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\Graphics5\\G5onG4\\Sources"
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\Kinc\\Backends\\Graphics5\\G5onG4\\Sources",
+                "c:\\Users\\Administrator\\devel-knim\\Knim\\NimCache",
+                "c:\\Users\\Administrator\\nim-1.4.2\\lib"
+
             ],
             "defines": [
                 "KORE_G1",
