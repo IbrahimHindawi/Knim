@@ -104,7 +104,7 @@ if defined(dynamic):
   cd(deploymentDir)
 
   echoYellow "Dynamic Mode Command:"
-  exec "nim c -r " & deploymentCmd & pathcmd &
+  exec "nim c -r " & deploymentCmd & pathcmd & " -g --debugger:native " &
     " -d:" & backend & 
     " -d:" & runmode & 
     " " & dynPath
