@@ -5,12 +5,10 @@
             "label": "Nim: Build & Run",
             "command": "nim",
             "args": [
-                "c",
-                //"-o:DeploymentN/${fileBasenameNoExtension}",
-                //"--define: Direct3D11",
-                //"--path:../Kinc/Backends/Graphics4/Direct3D11/Sources/kinc/backend/graphics4/",
-                "-r",
-                "Sources/${fileBasename}"
+                "-d:dynamic",
+                "-d:direct3d11",
+                "Sources/build.nims",
+                "Sources/tutorial03/prog.nim"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
@@ -25,12 +23,12 @@
             "label": "Nim: Build Debug",
             "command": "nim",
             "args": [
-                "compile",
-                "-g",
-                //"--define: Direct3D11",
-                "--debugger:native",
-                //"-o:DeploymentN/${fileBasenameNoExtension}",
-                "Sources/${fileBasename}"
+                "-d:dynamic",
+                "-d:direct3d11",
+                //"-g",
+                //"--debugger:native",
+                "Sources/build.nims",
+                "Sources/tutorial03/prog.nim"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
