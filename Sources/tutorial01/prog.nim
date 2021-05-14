@@ -6,7 +6,6 @@
       nim -d:codegen -d:direct3d11 Sources/build.nims Sources/tutorial01/prog.nim
 ]#
 
-import utils/ptrops
 import kinc/graphics4/graphics
 import kinc/system
 import kinc/color
