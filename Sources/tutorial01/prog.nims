@@ -1,0 +1,1 @@
+switch("path","../../Knim-Standalone/Knim")
