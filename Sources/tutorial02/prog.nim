@@ -21,14 +21,14 @@ type
 
 var 
   vertices: array[9, float32] = [
-    -1.0'f32, -1.0, 0.0,
-     1.0, -1.0, 0.0,
-     0.0,  1.0, 0.0
+    -1.0'f32, -1.0, 0.0, #0
+     1.0, -1.0, 0.0, #1
+    -1.0,  1.0, 0.0, #2
   ]
-  indices: array[3, int] = [
-    0,
+  indices: array[3, int32] = [
+    0'i32,
     1,
-    2
+    2,
   ]
   vertexBuff: kinc_g4_vertex_buffer_t
   indexBuff: kinc_g4_index_buffer_t
@@ -79,20 +79,24 @@ proc nim_start() {.exportc.} =
   pipe.color_attachment_count = 1
   kinc_g4_pipeline_compile(pipe.addr)
 
-  kinc_g4_vertex_buffer_init(vertexBuff.addr, (vertices.len/structureLength).cint, structure.addr, KINC_G4_USAGE_STATIC, 0)
+  kinc_g4_vertex_buffer_init(vertexBuff.addr,
+                            (vertices.len/structureLength).cint, # number of points
+                            structure.addr,
+                            KINC_G4_USAGE_STATIC, 0)
   block:
     var
-      vtx = cast[PArray[float32]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
+      vertexBufferData = cast[PArray[float32]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
     for i in 0 ..< vertices.len:
-      vtx[i] = vertices[i]
+      vertexBufferData[i] = vertices[i]
     kinc_g4_vertex_buffer_unlock_all(vertexBuff.addr)
 
-  kinc_g4_index_buffer_init(indexBuff.addr, 3, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
+  kinc_g4_index_buffer_init(indexBuff.addr, indices.len.int32, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
+  
   block:
     var
-      idx = cast[PArray[int32]](kinc_g4_index_buffer_lock(indexBuff.addr))
+      indexBufferData = cast[PArray[int32]](kinc_g4_index_buffer_lock(indexBuff.addr))
     for i in 0 ..< indices.len:
-      idx[i] = indices[i].cint
+      indexBufferData[i] = indices[i]
     kinc_g4_index_buffer_unlock(indexBuff.addr)
 
   kinc_start()
