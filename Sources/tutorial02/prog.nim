@@ -18,13 +18,16 @@ import kinc/image
 import kinc/system
 import kinc/color
 
+type
+  PArray[T] = ptr UncheckedArray[T]
+
 var 
-  vertices: seq[float32] = @[
+  vertices: array[0..8, float32] = [
     -1.0'f32, -1.0, 0.0,
      1.0, -1.0, 0.0,
      0.0,  1.0, 0.0
   ]
-  indices: seq[int] = @[
+  indices: array[0..2, int] = [
     0,
     1,
     2
@@ -71,7 +74,7 @@ proc nim_start() {.exportc.} =
   const structureLength = 3
   
   kinc_g4_pipeline_init(pipe.addr)
-  var imgfmt: kinc_image_format_t
+  #var imgfmt: kinc_image_format_t
   pipe.vertex_shader = vertex_shader.addr
   pipe.fragment_shader = fragment_shader.addr
   pipe.input_layout[0] = structure.addr
@@ -81,25 +84,20 @@ proc nim_start() {.exportc.} =
   #pipe.depth_
   kinc_g4_pipeline_compile(pipe.addr)
 
-  kinc_g4_vertex_buffer_init(vertexBuff.addr, (vertices.len/3).cint, structure.addr, KINC_G4_USAGE_STATIC, 0)
+  kinc_g4_vertex_buffer_init(vertexBuff.addr, (vertices.len/structureLength).cint, structure.addr, KINC_G4_USAGE_STATIC, 0)
   block:
     var
-      #vtx: ptr cfloat = kinc_g4_vertex_buffer_lock_all(vertexBuff.addr)
-      #i = 0
-      vtx = cast[ptr UncheckedArray[cfloat]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
+      vtx = cast[PArray[float32]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
     for i in 0 ..< vertices.len:
       vtx[i] = vertices[i]
-
     kinc_g4_vertex_buffer_unlock_all(vertexBuff.addr)
 
   kinc_g4_index_buffer_init(indexBuff.addr, 3, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
   block:
     var
-      #idx: ptr cint = kinc_g4_index_buffer_lock(indexBuff.addr)
-      idx = cast[ptr UncheckedArray[cint]](kinc_g4_index_buffer_lock(indexBuff.addr))
+      idx = cast[PArray[int32]](kinc_g4_index_buffer_lock(indexBuff.addr))
     for i in 0 ..< indices.len:
       idx[i] = indices[i].cint
-
     kinc_g4_index_buffer_unlock(indexBuff.addr)
 
   kinc_start()

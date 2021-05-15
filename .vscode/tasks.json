@@ -8,7 +8,7 @@
                 "-d:dynamic",
                 "-d:direct3d11",
                 "Sources/build.nims",
-                "Sources/tutorial03/prog.nim"
+                "Sources/tutorial04/prog.nim"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
@@ -28,7 +28,7 @@
                 //"-g",
                 //"--debugger:native",
                 "Sources/build.nims",
-                "Sources/tutorial03/prog.nim"
+                "Sources/tutorial04/prog.nim"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"

@@ -16,7 +16,7 @@
 		{
             "type": "lldb",
             "request": "launch",
-            "name": "nim: debug current file",
+            "name": "Nim: Debug",
             "preLaunchTask": "Nim: Build Debug",
             "program": "Deployment/prog", //${fileBasenameNoExtension}
             "args": [],
