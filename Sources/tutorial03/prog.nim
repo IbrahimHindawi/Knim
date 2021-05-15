@@ -22,8 +22,6 @@ import kinc/color
 
 import glm
 
-
-
 proc translate_matrix(kincMatrix: var kinc_matrix4x4_t, glmMatrix: Mat4x4): kinc_matrix4x4_t =
   kincMatrix.m[0] = glmMatrix[0][0]
   kincMatrix.m[1] = glmMatrix[0][1]
@@ -135,7 +133,7 @@ proc nim_start() {.exportc.} =
 
     kinc_g4_vertex_buffer_unlock_all(vertexBuff.addr)
 
-  kinc_g4_index_buffer_init(indexBuff.addr, 3, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
+  kinc_g4_index_buffer_init(indexBuff.addr, indices.len.int32, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
   block:
     var
       indexBufferData = cast[PArray[int32]](kinc_g4_index_buffer_lock(indexBuff.addr))

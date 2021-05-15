@@ -20,19 +20,27 @@ type
   PArray[T] = ptr UncheckedArray[T]
 
 var 
-  vertices: array[9, float32] = [
+  vertices: array[18, float32] = [
     -1.0'f32, -1.0, 0.0, #0
      1.0, -1.0, 0.0, #1
     -1.0,  1.0, 0.0, #2
+     
+     1.0,  1.0, 0.0, #3
+     1.0, -1.0, 0.0, #1
+    -1.0,  1.0, 0.0, #2
   ]
-  indices: array[3, int32] = [
+
+  indices: array[6, int32] = [
     0'i32,
     1,
+    2,
+    1,
+    3,
     2,
   ]
   vertexBuff: kinc_g4_vertex_buffer_t
   indexBuff: kinc_g4_index_buffer_t
-  pipe: pipeline
+  pipe: kinc_g4_pipeline_t
   vertex_shader: kinc_g4_shader_t
   fragment_shader: kinc_g4_shader_t
 
@@ -71,7 +79,7 @@ proc nim_start() {.exportc.} =
   kinc_g4_vertex_structure_add(structure.addr, "pos", KINC_G4_VERTEX_DATA_FLOAT3)
   const structureLength = 3
   
-  init(pipe.addr)
+  kinc_g4_pipeline_init(pipe.addr)
   pipe.vertex_shader = vertex_shader.addr
   pipe.fragment_shader = fragment_shader.addr
   pipe.input_layout[0] = structure.addr
@@ -91,7 +99,6 @@ proc nim_start() {.exportc.} =
     kinc_g4_vertex_buffer_unlock_all(vertexBuff.addr)
 
   kinc_g4_index_buffer_init(indexBuff.addr, indices.len.int32, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
-  
   block:
     var
       indexBufferData = cast[PArray[int32]](kinc_g4_index_buffer_lock(indexBuff.addr))

@@ -46,36 +46,47 @@ var
     -1.0'f32,-1.0,-1.0,
     -1.0,-1.0, 1.0,
     -1.0, 1.0, 1.0,
+
      1.0, 1.0,-1.0,
     -1.0,-1.0,-1.0,
     -1.0, 1.0,-1.0,
+
      1.0,-1.0, 1.0,
     -1.0,-1.0,-1.0,
      1.0,-1.0,-1.0,
+
      1.0, 1.0,-1.0,
      1.0,-1.0,-1.0,
     -1.0,-1.0,-1.0,
+
     -1.0,-1.0,-1.0,
     -1.0, 1.0, 1.0,
     -1.0, 1.0,-1.0,
+
      1.0,-1.0, 1.0,
     -1.0,-1.0, 1.0,
     -1.0,-1.0,-1.0,
+
     -1.0, 1.0, 1.0,
     -1.0,-1.0, 1.0,
      1.0,-1.0, 1.0,
+
      1.0, 1.0, 1.0,
      1.0,-1.0,-1.0,
      1.0, 1.0,-1.0,
+
      1.0,-1.0,-1.0,
      1.0, 1.0, 1.0,
      1.0,-1.0, 1.0,
+
      1.0, 1.0, 1.0,
      1.0, 1.0,-1.0,
     -1.0, 1.0,-1.0,
+
      1.0, 1.0, 1.0,
     -1.0, 1.0,-1.0,
     -1.0, 1.0, 1.0,
+    
      1.0, 1.0, 1.0,
     -1.0, 1.0, 1.0,
      1.0,-1.0, 1.0
@@ -84,45 +95,52 @@ var
     0.583'f32,  0.771,  0.014,
     0.609,  0.115,  0.436,
     0.327,  0.483,  0.844,
+
     0.822,  0.569,  0.201,
     0.435,  0.602,  0.223,
     0.310,  0.747,  0.185,
+
     0.597,  0.770,  0.761,
     0.559,  0.436,  0.730,
     0.359,  0.583,  0.152,
+
     0.483,  0.596,  0.789,
     0.559,  0.861,  0.639,
     0.195,  0.548,  0.859,
+
     0.014,  0.184,  0.576,
     0.771,  0.328,  0.970,
     0.406,  0.615,  0.116,
+
     0.676,  0.977,  0.133,
     0.971,  0.572,  0.833,
     0.140,  0.616,  0.489,
+
     0.997,  0.513,  0.064,
     0.945,  0.719,  0.592,
     0.543,  0.021,  0.978,
+
     0.279,  0.317,  0.505,
     0.167,  0.620,  0.077,
     0.347,  0.857,  0.137,
+
     0.055,  0.953,  0.042,
     0.714,  0.505,  0.345,
     0.783,  0.290,  0.734,
+
     0.722,  0.645,  0.174,
     0.302,  0.455,  0.848,
     0.225,  0.587,  0.040,
+
     0.517,  0.713,  0.338,
     0.053,  0.959,  0.120,
     0.393,  0.621,  0.362,
+
     0.673,  0.211,  0.457,
     0.820,  0.883,  0.371,
     0.982,  0.099,  0.879
   ]
-  indices: seq[int] = @[
-    0,
-    1,
-    2
-  ]
+
   vertexBuff: kinc_g4_vertex_buffer_t
   indexBuff: kinc_g4_index_buffer_t
   pipe: kinc_g4_pipeline_t
@@ -199,25 +217,43 @@ proc nim_start() {.exportc.} =
 
   mvp = model * projection * view
 
-  kinc_g4_vertex_buffer_init(vertexBuff.addr, (vertices.len/3).cint, structure.addr, KINC_G4_USAGE_STATIC, 0)
+  echo "cube number of vertices = ", vertices.len
+  echo "cube number of position points = ", (vertices.len / 3).int
+  echo "cube number of color points = ", (colors.len / 3).int
+  echo "cube number of structures = ", (vertices.len / structureLength).int
+  echo "cube number of ??? = ", ((vertices.len/3) / structureLength).int
+
+  kinc_g4_vertex_buffer_init(vertexBuff.addr, 
+                            (vertices.len/3).cint,  
+                            structure.addr, 
+                            KINC_G4_USAGE_STATIC, 0)
   block:
     var
       vtx = cast[ptr UncheckedArray[cfloat]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
-    for i in 0 ..< (vertices.len/structureLength).int:
-      vtx[i * structureLength] = vertices[i * 3]
+      #vtx = cast[seq[cfloat]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
+    for i in 0 ..< (vertices.len/3).int:  
+      echo "point ", i
+      vtx[i * structureLength + 0] = vertices[i * 3]
+      echo vtx[i * structureLength + 0]
       vtx[i * structureLength + 1] = vertices[i * 3 + 1]
+      echo vtx[i * structureLength + 1]
       vtx[i * structureLength + 2] = vertices[i * 3 + 2]
+      echo vtx[i * structureLength + 2]
       vtx[i * structureLength + 3] = colors[i * 3]
+      echo vtx[i * structureLength + 3]
       vtx[i * structureLength + 4] = colors[i * 3 + 1]
+      echo vtx[i * structureLength + 4]
       vtx[i * structureLength + 5] = colors[i * 3 + 2]
+      echo vtx[i * structureLength + 5]
 
     kinc_g4_vertex_buffer_unlock_all(vertexBuff.addr)
 
   var
     indices: seq[cint]
   
-  for i in 0 ..< vertices.len:
+  for i in 0 ..< (vertices.len/3).int:
     indices.add(i.cint)
+  
   
   kinc_g4_index_buffer_init(indexBuff.addr, indices.len.cint, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
   block:
