@@ -6,7 +6,6 @@
       nim -d:codegen -d:direct3d11 Sources/build.nims Sources/tutorial02/prog.nim
 ]#
 
-#import utils/ptrops
 import kinc/graphics4/graphics
 import kinc/graphics4/pipeline
 import kinc/graphics4/vertexstructure
@@ -14,7 +13,6 @@ import kinc/graphics4/vertexbuffer
 import kinc/graphics4/indexbuffer
 import kinc/graphics4/shader
 import kinc/io/filereader
-import kinc/image
 import kinc/system
 import kinc/color
 
@@ -22,12 +20,12 @@ type
   PArray[T] = ptr UncheckedArray[T]
 
 var 
-  vertices: array[0..8, float32] = [
+  vertices: array[9, float32] = [
     -1.0'f32, -1.0, 0.0,
      1.0, -1.0, 0.0,
      0.0,  1.0, 0.0
   ]
-  indices: array[0..2, int] = [
+  indices: array[3, int] = [
     0,
     1,
     2
@@ -74,14 +72,11 @@ proc nim_start() {.exportc.} =
   const structureLength = 3
   
   kinc_g4_pipeline_init(pipe.addr)
-  #var imgfmt: kinc_image_format_t
   pipe.vertex_shader = vertex_shader.addr
   pipe.fragment_shader = fragment_shader.addr
   pipe.input_layout[0] = structure.addr
   pipe.input_layout[1] = nil  
   pipe.color_attachment_count = 1
-  #pipe.color_attachment[0] = imgfmt.KINC_IMAGE_FORMAT_RGBA32
-  #pipe.depth_
   kinc_g4_pipeline_compile(pipe.addr)
 
   kinc_g4_vertex_buffer_init(vertexBuff.addr, (vertices.len/structureLength).cint, structure.addr, KINC_G4_USAGE_STATIC, 0)
