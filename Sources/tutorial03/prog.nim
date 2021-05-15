@@ -22,6 +22,8 @@ import kinc/color
 
 import glm
 
+
+
 proc translate_matrix(kincMatrix: var kinc_matrix4x4_t, glmMatrix: Mat4x4): kinc_matrix4x4_t =
   kincMatrix.m[0] = glmMatrix[0][0]
   kincMatrix.m[1] = glmMatrix[0][1]
@@ -41,14 +43,16 @@ proc translate_matrix(kincMatrix: var kinc_matrix4x4_t, glmMatrix: Mat4x4): kinc
   kincMatrix.m[15] = glmMatrix[3][3]
   result = kincMatrix
 
+type
+  PArray[T] = ptr UncheckedArray[T]
 var 
-  vertices: seq[float32] = @[
+  vertices: array[9, float32] = [
     -1.0'f32, -1.0, 0.0,
      1.0, -1.0, 0.0,
      0.0,  1.0, 0.0
   ]
-  indices: seq[int] = @[
-    0,
+  indices: array[3, int32] = [
+    0'i32,
     1,
     2
   ]
@@ -122,21 +126,21 @@ proc nim_start() {.exportc.} =
 
   mvp = model * projection * view
 
-  kinc_g4_vertex_buffer_init(vertexBuff.addr, (vertices.len/3).cint, structure.addr, KINC_G4_USAGE_STATIC, 0)
+  kinc_g4_vertex_buffer_init(vertexBuff.addr, (vertices.len/structureLength).cint, structure.addr, KINC_G4_USAGE_STATIC, 0)
   block:
     var
-      vtx = cast[ptr UncheckedArray[cfloat]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
+      vertexBufferData = cast[PArray[float32]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
     for i in 0 ..< vertices.len:
-      vtx[i] = vertices[i]
+      vertexBufferData[i] = vertices[i]
 
     kinc_g4_vertex_buffer_unlock_all(vertexBuff.addr)
 
   kinc_g4_index_buffer_init(indexBuff.addr, 3, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
   block:
     var
-      idx = cast[ptr UncheckedArray[cint]](kinc_g4_index_buffer_lock(indexBuff.addr))
+      indexBufferData = cast[PArray[int32]](kinc_g4_index_buffer_lock(indexBuff.addr))
     for i in 0 ..< indices.len:
-      idx[i] = indices[i].cint
+      indexBufferData[i] = indices[i].int32
 
     kinc_g4_index_buffer_unlock(indexBuff.addr)
 
