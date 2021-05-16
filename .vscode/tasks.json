@@ -15,9 +15,10 @@
             },
             "type": "shell",
             "group": {
-                //"kind": "build",
+                "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Nim: Build Debug",
@@ -25,8 +26,6 @@
             "args": [
                 "-d:dynamic",
                 "-d:direct3d11",
-                //"-g",
-                //"--debugger:native",
                 "Sources/build.nims",
                 "Sources/tutorial04/prog.nim"
             ],
@@ -34,6 +33,7 @@
                 "cwd": "${workspaceRoot}"
             },
             "type": "shell",
+            "problemMatcher": []
         }
     ]
 }
