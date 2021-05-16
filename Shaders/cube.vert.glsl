@@ -2,7 +2,7 @@
 
 // Input vertex data, different for all executions of this shader
 in vec3 pos;
-in vec3 col;
+//in vec3 col;
 
 // Output data - will be interpolated for each fragment.
 out vec3 fragmentColor;
@@ -16,5 +16,6 @@ void main() {
 
 	// The color of each vertex will be interpolated
 	// to produce the color of each fragment
-	fragmentColor = col;
+	fragmentColor = vec3(1.0, 1.0, 1.0);
+	//fragmentColor = col;
 }

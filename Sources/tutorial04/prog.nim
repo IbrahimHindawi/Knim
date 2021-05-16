@@ -188,8 +188,8 @@ proc nim_start() {.exportc.} =
   var structure: VertexStructure
   initVertexStructure(structure.addr)
   vertexStructureAdd(structure.addr, "pos", vdFloat3)
-  vertexStructureAdd(structure.addr, "col", vdFloat3)
-  const structureLength = 6
+  #vertexStructureAdd(structure.addr, "col", vdFloat3)
+  const structureLength = 3
 
   initPipeline(pipe.addr)
 
@@ -199,11 +199,10 @@ proc nim_start() {.exportc.} =
   pipe.input_layout[0] = structure.addr
   pipe.input_layout[1] = nil  
 
-  pipe.depth_write = true
-  pipe.depth_mode = KINC_G4_COMPARE_LESS
-  pipe.color_attachment_count = 1
+  #pipe.depth_write = true
+  #pipe.depth_mode = KINC_G4_COMPARE_LESS
+  #pipe.color_attachment_count = 1
 
-  #pipe.color_attachment[0] = imgfmt.KINC_IMAGE_FORMAT_RGBA32
   pipelineCompile(pipe.addr)
 
   mvpID = pipelineGetConstantLocation(pipe.addr, "MVP")
@@ -217,34 +216,35 @@ proc nim_start() {.exportc.} =
 
   mvp = model * projection * view
 
-  echo "cube number of vertices = ", vertices.len
-  echo "cube number of position points = ", (vertices.len / 3).int
-  echo "cube number of color points = ", (colors.len / 3).int
-  echo "cube number of structures = ", (vertices.len / structureLength).int
-  echo "cube number of ??? = ", ((vertices.len/3) / structureLength).int
+  #echo "cube number of vertices = ", vertices.len
+  #echo "cube number of position points = ", (vertices.len / 3).int
+  #echo "cube number of color points = ", (colors.len / 3).int
+  #echo "cube number of structures = ", (vertices.len / structureLength).int
+  #echo "cube number of ??? = ", ((vertices.len/3) / structureLength).int
 
   initVertexBuffer(vertexBuff.addr, 
-                            (vertices.len/3).cint,  
+                            vertices.len.cint,  
                             structure.addr, 
                             uStatic, 0)
   block:
     var
-      vtx = cast[ptr UncheckedArray[cfloat]](vertexBufferLockAll(vertexBuff.addr))
-      #vtx = cast[seq[cfloat]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
-    for i in 0 ..< (vertices.len/3).int:  
-      echo "point ", i
-      vtx[i * structureLength + 0] = vertices[i * 3]
-      echo vtx[i * structureLength + 0]
-      vtx[i * structureLength + 1] = vertices[i * 3 + 1]
-      echo vtx[i * structureLength + 1]
-      vtx[i * structureLength + 2] = vertices[i * 3 + 2]
-      echo vtx[i * structureLength + 2]
-      vtx[i * structureLength + 3] = colors[i * 3]
-      echo vtx[i * structureLength + 3]
-      vtx[i * structureLength + 4] = colors[i * 3 + 1]
-      echo vtx[i * structureLength + 4]
-      vtx[i * structureLength + 5] = colors[i * 3 + 2]
-      echo vtx[i * structureLength + 5]
+      vertexBufferData = cast[ptr UncheckedArray[float32]](vertexBufferLockAll(vertexBuff.addr))
+      #vtx = cast[seq[float32]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
+    for i in 0 ..< (vertices.len/structureLength).int:  
+      #vertexBufferData[i] = vertices[i]
+      # echo "point ", i
+      vertexBufferData[i * structureLength + 0] = vertices[i * 3]
+      # echo vtx[i * structureLength + 0]
+      vertexBufferData[i * structureLength + 1] = vertices[i * 3 + 1]
+      # echo vtx[i * structureLength + 1]
+      vertexBufferData[i * structureLength + 2] = vertices[i * 3 + 2]
+      # echo vtx[i * structureLength + 2]
+      # vtx[i * structureLength + 3] = colors[i * 3]
+      # echo vtx[i * structureLength + 3]
+      # vtx[i * structureLength + 4] = colors[i * 3 + 1]
+      # echo vtx[i * structureLength + 4]
+      # vtx[i * structureLength + 5] = colors[i * 3 + 2]
+      # echo vtx[i * structureLength + 5]
 
     vertexBufferUnlockAll(vertexBuff.addr)
 
@@ -252,15 +252,14 @@ proc nim_start() {.exportc.} =
     indices: seq[cint]
   
   for i in 0 ..< (vertices.len/3).int:
-    indices.add(i.cint)
-  
+    indices.add(i.int32)
   
   initIndexBuffer(indexBuff.addr, indices.len.cint, ibf32bit)
   block:
     var
-      idx = cast[ptr UncheckedArray[cint]](indexBufferLock(indexBuff.addr))
+      idx = cast[ptr UncheckedArray[int32]](indexBufferLock(indexBuff.addr))
     for i in 0 ..< indices.len:
-      idx[i] = indices[i].cint
+      idx[i] = indices[i].int32
 
     indexBufferUnlock(indexBuff.addr)
 
