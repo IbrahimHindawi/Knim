@@ -141,57 +141,57 @@ var
     0.982,  0.099,  0.879
   ]
 
-  vertexBuff: kinc_g4_vertex_buffer_t
-  indexBuff: kinc_g4_index_buffer_t
-  pipe: kinc_g4_pipeline_t
+  vertexBuff: VertexBuffer
+  indexBuff: IndexBuffer
+  pipe: Pipeline
 
-  vertex_shader: kinc_g4_shader_t
-  fragment_shader: kinc_g4_shader_t
+  vertex_shader: Shader
+  fragment_shader: Shader
 
   mvp = mat4(1.0f)
   kmvp: kinc_matrix4x4_t
   mvpID: kinc_g4_constant_location_t
 
-proc load_shader(filename: cstring, shader: ptr kinc_g4_shader_t, shader_type: kinc_g4_shader_type_t) =
-  var file: kinc_file_reader_t 
-  discard kinc_file_reader_open(file.addr, filename, KINC_FILE_TYPE_ASSET)
+proc load_shader(filename: cstring, shader: ptr Shader, shader_type: ShaderType) =
+  var file: fileReader 
+  discard fileReaderOpen(file.addr, filename, FileTypeAsset)
   var
-    data_size: csize_t = kinc_file_reader_size(file.addr)
+    data_size: csize_t = fileReaderSize(file.addr)
     data: ptr uint8 = cast[ptr uint8](alloc(data_size))
-  discard kinc_file_reader_read(file.addr, data, data_size)
-  kinc_file_reader_close(file.addr)
-  kinc_g4_shader_init(shader, data, data_size, shader_type)
+  discard fileReaderRead(file.addr, data, data_size)
+  fileReaderClose(file.addr)
+  initShader(shader, data, data_size, shader_type)
 
 proc update {.cdecl.} =
-  kinc_g4_begin(0)
-  kinc_g4_clear(kinc_g4_clear_color.cuint, KINC_COLOR_BLUE.cuint, 0.0f, 0)
+  g4Begin(0)
+  g4Clear(ClearColor.cuint, ColorBlue.cuint, 0.0f, 0)
 
-  kinc_g4_set_vertex_buffer(vertexBuff.addr)
-  kinc_g4_set_index_buffer(indexBuff.addr)
-  kinc_g4_set_pipeline(pipe.addr)
+  setVertexBuffer(vertexBuff.addr)
+  setIndexBuffer(indexBuff.addr)
+  setPipeline(pipe.addr)
 
   kmvp = translate_matrix(kmvp, mvp)
   kinc_g4_set_matrix4(mvpID, kmvp.addr)
 
-  kinc_g4_draw_indexed_vertices()
+  g4DrawIndexedVertices()
 
-  kinc_g4_end(0)
-  discard kinc_g4_swap_buffers()
+  g4End(0)
+  discard g4SwapBuffers()
 
 proc nim_start() {.exportc.} =
-  discard kinc_init("Shader", 1024, 768, nil, nil)
-  kinc_set_update_callback(update)
+  discard init("Shader", 1024, 768, nil, nil)
+  setUpdateCallback(update)
 
-  load_shader("cube.vert", vertex_shader.addr, KINC_G4_SHADER_TYPE_VERTEX)
-  load_shader("cube.frag", fragment_shader.addr, KINC_G4_SHADER_TYPE_FRAGMENT)
+  load_shader("cube.vert", vertex_shader.addr, stVertex)
+  load_shader("cube.frag", fragment_shader.addr, stFragment)
 
-  var structure: kinc_g4_vertex_structure_t
-  kinc_g4_vertex_structure_init(structure.addr)
-  kinc_g4_vertex_structure_add(structure.addr, "pos", KINC_G4_VERTEX_DATA_FLOAT3)
-  kinc_g4_vertex_structure_add(structure.addr, "col", KINC_G4_VERTEX_DATA_FLOAT3)
+  var structure: VertexStructure
+  initVertexStructure(structure.addr)
+  vertexStructureAdd(structure.addr, "pos", vdFloat3)
+  vertexStructureAdd(structure.addr, "col", vdFloat3)
   const structureLength = 6
 
-  kinc_g4_pipeline_init(pipe.addr)
+  initPipeline(pipe.addr)
 
   pipe.vertex_shader = vertex_shader.addr
   pipe.fragment_shader = fragment_shader.addr
@@ -204,9 +204,9 @@ proc nim_start() {.exportc.} =
   pipe.color_attachment_count = 1
 
   #pipe.color_attachment[0] = imgfmt.KINC_IMAGE_FORMAT_RGBA32
-  kinc_g4_pipeline_compile(pipe.addr)
+  pipelineCompile(pipe.addr)
 
-  mvpID = kinc_g4_pipeline_get_constant_location(pipe.addr, "MVP")
+  mvpID = pipelineGetConstantLocation(pipe.addr, "MVP")
 
   var
     model = mat4(1.0f)
@@ -223,13 +223,13 @@ proc nim_start() {.exportc.} =
   echo "cube number of structures = ", (vertices.len / structureLength).int
   echo "cube number of ??? = ", ((vertices.len/3) / structureLength).int
 
-  kinc_g4_vertex_buffer_init(vertexBuff.addr, 
+  initVertexBuffer(vertexBuff.addr, 
                             (vertices.len/3).cint,  
                             structure.addr, 
-                            KINC_G4_USAGE_STATIC, 0)
+                            uStatic, 0)
   block:
     var
-      vtx = cast[ptr UncheckedArray[cfloat]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
+      vtx = cast[ptr UncheckedArray[cfloat]](vertexBufferLockAll(vertexBuff.addr))
       #vtx = cast[seq[cfloat]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
     for i in 0 ..< (vertices.len/3).int:  
       echo "point ", i
@@ -246,7 +246,7 @@ proc nim_start() {.exportc.} =
       vtx[i * structureLength + 5] = colors[i * 3 + 2]
       echo vtx[i * structureLength + 5]
 
-    kinc_g4_vertex_buffer_unlock_all(vertexBuff.addr)
+    vertexBufferUnlockAll(vertexBuff.addr)
 
   var
     indices: seq[cint]
@@ -255,14 +255,14 @@ proc nim_start() {.exportc.} =
     indices.add(i.cint)
   
   
-  kinc_g4_index_buffer_init(indexBuff.addr, indices.len.cint, KINC_G4_INDEX_BUFFER_FORMAT_32BIT)
+  initIndexBuffer(indexBuff.addr, indices.len.cint, ibf32bit)
   block:
     var
-      idx = cast[ptr UncheckedArray[cint]](kinc_g4_index_buffer_lock(indexBuff.addr))
+      idx = cast[ptr UncheckedArray[cint]](indexBufferLock(indexBuff.addr))
     for i in 0 ..< indices.len:
       idx[i] = indices[i].cint
 
-    kinc_g4_index_buffer_unlock(indexBuff.addr)
+    indexBufferUnlock(indexBuff.addr)
 
   kinc_start()
 

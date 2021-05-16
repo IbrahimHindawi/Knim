@@ -11,15 +11,15 @@ import kinc/system
 import kinc/color
 
 proc update {.cdecl.} =
-  kinc_g4_begin(0)
-  kinc_g4_clear(kinc_g4_clear_color.cuint, KINC_COLOR_BLACK.cuint, 0.0f, 0)
-  kinc_g4_end(0)
-  discard kinc_g4_swap_buffers()
+  g4Begin(0)
+  g4Clear(ClearColor.cuint, ColorBlack.cuint, 0.0f, 0)
+  g4End(0)
+  discard g4SwapBuffers()
 
 proc nim_start() {.exportc.} =
-  discard kinc_init("Shader", 1024, 768, nil, nil)
-  kinc_set_update_callback(update)
-  kinc_start()
+  discard init("Shader", 1024, 768, nil, nil)
+  setUpdateCallback(update)
+  kincStart()
 
 when defined(dynamic):
   nim_start()
