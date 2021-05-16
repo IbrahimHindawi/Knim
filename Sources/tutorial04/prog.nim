@@ -188,7 +188,6 @@ proc nim_start() {.exportc.} =
   var structure: VertexStructure
   initVertexStructure(structure.addr)
   vertexStructureAdd(structure.addr, "pos", vdFloat3)
-  #vertexStructureAdd(structure.addr, "col", vdFloat3)
   const structureLength = 3
 
   initPipeline(pipe.addr)
@@ -216,12 +215,6 @@ proc nim_start() {.exportc.} =
 
   mvp = model * projection * view
 
-  #echo "cube number of vertices = ", vertices.len
-  #echo "cube number of position points = ", (vertices.len / 3).int
-  #echo "cube number of color points = ", (colors.len / 3).int
-  #echo "cube number of structures = ", (vertices.len / structureLength).int
-  #echo "cube number of ??? = ", ((vertices.len/3) / structureLength).int
-
   initVertexBuffer(vertexBuff.addr, 
                             vertices.len.cint,  
                             structure.addr, 
@@ -229,22 +222,11 @@ proc nim_start() {.exportc.} =
   block:
     var
       vertexBufferData = cast[ptr UncheckedArray[float32]](vertexBufferLockAll(vertexBuff.addr))
-      #vtx = cast[seq[float32]](kinc_g4_vertex_buffer_lock_all(vertexBuff.addr))
     for i in 0 ..< (vertices.len/structureLength).int:  
-      #vertexBufferData[i] = vertices[i]
-      # echo "point ", i
       vertexBufferData[i * structureLength + 0] = vertices[i * 3]
-      # echo vtx[i * structureLength + 0]
       vertexBufferData[i * structureLength + 1] = vertices[i * 3 + 1]
-      # echo vtx[i * structureLength + 1]
       vertexBufferData[i * structureLength + 2] = vertices[i * 3 + 2]
-      # echo vtx[i * structureLength + 2]
-      # vtx[i * structureLength + 3] = colors[i * 3]
-      # echo vtx[i * structureLength + 3]
-      # vtx[i * structureLength + 4] = colors[i * 3 + 1]
-      # echo vtx[i * structureLength + 4]
-      # vtx[i * structureLength + 5] = colors[i * 3 + 2]
-      # echo vtx[i * structureLength + 5]
+
 
     vertexBufferUnlockAll(vertexBuff.addr)
 
