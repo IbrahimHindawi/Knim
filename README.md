@@ -50,7 +50,7 @@ invoke ```build.nims``` NimScript: ```nim -d:[mode] -d:[backend] Sources/build.n
     - Edit kincfile.js to point to your local nim/lib directory.
     - Customize ```build.nims``` Nimscript file for target compiler/cpu/os.
     - for Android, add ```ndk {abiFilters "arm64-v8a"}``` to the ```gradle.build```
-    - ```nim -d:codegen -d:direct3d11 Sources/build.nims Sources/prog.nim```
+    - ```nim -d:codegen -d:opengl Sources/build.nims Sources/prog.nim```
 
 ## Tutorials
 
