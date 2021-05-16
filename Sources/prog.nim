@@ -59,7 +59,7 @@ proc update {.cdecl.} =
   discard g4SwapBuffers()
 
 proc nim_start() {.exportc.} =
-  discard init("Shader", 1024, 768, nil, nil)
+  discard kincInit("Shader", 1024, 768, nil, nil)
   setUpdateCallback(update)
 
   loadShader("shader.vert", vertexShader.addr, stVertex)
@@ -98,7 +98,7 @@ proc nim_start() {.exportc.} =
       indexBufferData[i] = indices[i]
     indexBufferUnlock(indexBuff.addr)
 
-  kinc_start()
+  kincStart()
 
 when defined(dynamic):
   nim_start()
