@@ -56,6 +56,7 @@ invoke ```build.nims``` NimScript: ```nim -d:[mode] -d:[backend] Sources/build.n
 
 - [Lewis Lepton](https://www.youtube.com/playlist?list=PL4neAtv21WOmmR5mKb7TQvEQHpMh1h0po) - Kha Tutorial
 - [Lubos Lenco](https://github.com/luboslenco/kha3d_examples/wiki) - Kha 3D Tutorial
+- [Knim Samples](https://github.com/IbrahimHindawi/Knim-Samples) - Translated some existing tutorials to Nim
 
 ## Documentation
 
