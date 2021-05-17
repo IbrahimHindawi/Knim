@@ -48,7 +48,7 @@ proc loadShader(fileName: cstring, shader: ptr Shader, shaderType: ShaderType) =
 
 proc update {.cdecl.} =
   g4Begin(0)
-  g4Clear(ClearColor.cuint, 0xFF304040.cuint, 0.0f, 0)
+  g4Clear(ClearColor.cuint, 0xFF202020.cuint, 0.0f, 0)
 
   setPipeline(pipe.addr)
   setVertexBuffer(vertexBuff.addr)
