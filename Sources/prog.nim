@@ -21,9 +21,9 @@ type
 
 var 
   vertices: array[9, float32] = [
-    -1.0'f32, -1.0, 0.0, #0
-     1.0, -1.0, 0.0, #1
-    -1.0,  1.0, 0.0, #2
+    -0.5'f32, -0.5, 0.0, #0
+     0.5, -0.5, 0.0, #1
+     0.0,  0.5, 0.0, #2
   ]
   indices: array[3, int32] = [
     0'i32,
@@ -48,7 +48,7 @@ proc loadShader(fileName: cstring, shader: ptr Shader, shaderType: ShaderType) =
 
 proc update {.cdecl.} =
   g4Begin(0)
-  g4Clear(ClearColor.cuint, ColorBlack.cuint, 0.0f, 0)
+  g4Clear(ClearColor.cuint, 0xFF304040.cuint, 0.0f, 0)
 
   setPipeline(pipe.addr)
   setVertexBuffer(vertexBuff.addr)
@@ -79,9 +79,9 @@ proc nim_start() {.exportc.} =
   pipelineCompile(pipe.addr)
 
   initVertexBuffer(vertexBuff.addr,
-      (vertices.len/structureLength).cint, # number of points
-      structure.addr,
-      uStatic, 0)
+                  (vertices.len/structureLength).cint, # number of points
+                  structure.addr,
+                  uStatic, 0)
   block:
     var
       vertexBufferData = cast[PArray[float32]](vertexBufferLockAll(vertexBuff.addr))
@@ -89,8 +89,9 @@ proc nim_start() {.exportc.} =
       vertexBufferData[i] = vertices[i]
     vertexBufferUnlockAll(vertexBuff.addr)
 
-  initIndexBuffer(indexBuff.addr, indices.len.int32, ibf32bit)
-  
+  initIndexBuffer(indexBuff.addr, 
+                  indices.len.int32,
+                  ibf32bit)
   block:
     var
       indexBufferData = cast[PArray[int32]](indexBufferLock(indexBuff.addr))
